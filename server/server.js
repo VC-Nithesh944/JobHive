@@ -22,7 +22,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", function rootHandler(req, res) {
-  res.send("API Working");
+  res.send(`API Working`);
 });
 
 app.post('/webhooks',clerkWebhooks)
