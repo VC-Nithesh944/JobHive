@@ -22,7 +22,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", function rootHandler(req, res) {
-  res.send(`API Working`);
+  res.send("API Working");
 });
 
 app.post('/webhooks',clerkWebhooks)
@@ -30,7 +30,7 @@ app.post('/webhooks',clerkWebhooks)
 
 
 // Port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Sentry error handler
 Sentry.setupExpressErrorHandler(app);
