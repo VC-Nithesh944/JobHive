@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@clerk/express": "^1.7.22",
     "@sentry/node": "^10.5.0",
     "@sentry/vite-plugin": "^4.1.1",
     "bcrypt": "^6.0.0",

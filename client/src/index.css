@@ -5,6 +5,13 @@
   font-family: "Outfit";
 }
 
+.navbar-logo {
+  height: 40px; /* logo fits nicely inside navbar */
+  width: auto;  /* keeps aspect ratio */
+  object-fit:cover; /* ensures no stretching */
+  cursor: pointer; /* optional */
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

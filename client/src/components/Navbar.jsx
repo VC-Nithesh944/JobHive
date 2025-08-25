@@ -13,10 +13,10 @@ const Navbar = () => {
 
   return (
     <div className="shadow py-4">
-      <div className="container px-4 2xl:px-20 mx-auto flex justify-between items-center">
+      <div className="container px-4 2xl:px-10 mx-auto flex justify-between items-center">
         <img
           onClick={() => navigate(`/`)}
-          className="cursor-pointer"
+          className="navbar-logo "
           src={assets.logo}
           alt="Logo"
         />

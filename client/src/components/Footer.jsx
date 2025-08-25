@@ -4,7 +4,7 @@ import { assets } from "../assets/assets";
 const Footer = () => {
   return (
     <div className="container px-4 2xl:px-20 mx-auto flex items-center justify-between gap-4 py-3 mt-20">
-      <img widht={160} src={assets.logo} alt="" />
+      <img width={160} src={assets.logo} alt="" />
       <p className="flex-1 border-l border-gray-400 pl-4 text-sm text-gray-400 max-sm:hidden">
         Copyright @JobHive.dev | All right reserved
       </p>

@@ -1,9 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+{
+  /* To make api calls using backendUrl, we will be using Axios package */
+}
 
 const RecruiterLogin = () => {
-  const { setShowRecruiterLogin } = useContext(AppContext);
+  const navigate = useNavigate();
+  const {setCompanyData, setCompanyToken, setShowRecruiterLogin, backendUrl } = useContext(AppContext);
   const [state, setState] = useState("Login");
 
   const [name, setName] = useState("");
@@ -17,7 +25,52 @@ const RecruiterLogin = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (state == "Sign Up" && !isTextDataSubmitted) {
-      setIsTextDataSubmitted(true);
+      return setIsTextDataSubmitted(true);
+    }
+    try {
+      if (state === "Login") {
+        const { data } = await axios.post(backendUrl + "/api/company/login", {
+          email,
+          password,
+        });
+
+        if (data.success) {
+          //we will get company Data and token when we recruiter login, we need to save it in states created CD and Ct
+          setCompanyData(data.company);
+          setCompanyToken(data.token);
+          //Storing in local Storage for frequent access. saved in app
+          localStorage.setItem("companyToken", data.token);
+          setShowRecruiterLogin(false);
+          navigate("/dashboard");
+        } else {
+          toast.error(data.message);
+        }
+
+        //IF we dont get the data.success. we need to display error message using React.toastify
+      } else{
+        const formData = new FormData()
+        formData.append('name',name)
+        formData.append('password',password)
+        formData.append('email',email)
+        formData.append('image',image)
+        
+        const {data} = await axios.post(backendUrl+'/api/company/register' , formData)
+
+        if (data.success){
+           //we will get company Data and token when we recruiter login, we need to save it in states created CD and Ct
+          setCompanyData(data.company);
+          setCompanyToken(data.token);
+          //Storing in local Storage for frequent access. saved in app
+          localStorage.setItem("companyToken", data.token);
+          setShowRecruiterLogin(false);
+          navigate("/dashboard");
+        }
+        else{
+          toast.error(data.message)
+        }
+      }
+    } catch (error) {
+      toast.error(error.message)
     }
   };
 
