@@ -15,7 +15,7 @@ export const getUserData = async (req, res) => {
     /* Using clerk middle ware, will covert the token into .auth object contain userID and user Details*/
   }
 
-  const userId = req.auth.userId;
+  const userId = req.auth().userId;
 
   try {
     const user = await User.findById(userId);
