@@ -21,14 +21,7 @@ await connectDB();
 await connectCloudinary();
 
 // Middlewares
-app.use(cors({
-  origin: [
-    "https://job-hive-client.vercel.app",
-    "https://job-hive-client-ojf6di8n6-vc-nithesh944s-projects.vercel.app",// your deployed frontend
-    "http://localhost:5173"               // local dev, optional
-  ],
-  credentials: true, // if you use cookies or auth headers
-}));
+app.use(cors());
 
 app.use(express.json());
 app.use(clerkMiddleware());
