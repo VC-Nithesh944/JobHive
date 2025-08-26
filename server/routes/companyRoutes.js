@@ -15,7 +15,7 @@ import { protectCompany } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 //Register a company
-router.post("/register",upload.single('image'), registerCompany);
+router.post("/register", upload.single("image"), registerCompany);
 
 //Company Login
 router.post("/login", loginCompany);
@@ -27,17 +27,19 @@ router.get("/company", protectCompany, getCompanyData);
 router.post("/post-job", protectCompany, postJob);
 
 //Get Applicants Data of the Company
-router.get("/applicants",protectCompany, getCompanyJobApplicants);
+router.get("/applicants", protectCompany, getCompanyJobApplicants);
 
 //Get Company Job list
-router.get("/list-jobs",protectCompany, getCompanyPostedJobs);
+router.get("/list-jobs", protectCompany, getCompanyPostedJobs);
 
 //Change Application Status
-router.post("/change-status",protectCompany, changeJobApplicationStatus);
+router.post("/change-status", protectCompany, changeJobApplicationStatus);
 
 //Change Applications visibility
-router.post("/change-visibility",protectCompany, changeVisibility);
+router.post("/change-visibility", protectCompany, changeVisibility);
 
-{/* always add / symbol before the path route, it wasted my 15 minutes for the above resolution */}
+{
+  /* always add / symbol before the path route, it wasted my 15 minutes for the above resolution */
+}
 
-export default router
+export default router;

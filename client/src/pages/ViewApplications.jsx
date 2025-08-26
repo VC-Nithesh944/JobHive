@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { assets, viewApplicationsPageData } from "../assets/assets";
+import { assets} from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -32,9 +32,9 @@ const ViewApplications = () => {
   const changeJobApplicationStatus = async (id, status) => {
     try {
       const { data } = await axios.post(
-        backendUrl + "/api/company/change-status",
-        { id, status },
-        { headers: { token: companyToken } }
+        `${backendUrl}/api/company/change-status`,
+        { id, status }, // body
+        { headers: { token: companyToken } } // headers
       );
 
       if (data.success) {

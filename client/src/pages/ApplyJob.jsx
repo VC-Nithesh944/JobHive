@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
-import { assets} from "../assets/assets";
+import { assets } from "../assets/assets";
 import kConvert from "k-convert";
 import moment from "moment";
 import JobCard from "../components/JobCard";
@@ -76,10 +76,9 @@ const ApplyJob = () => {
   };
 
   const checkAlreadyApplied = () => {
-    const hasApplied = userApplication.some((item) => { 
-      return item.jobId._id === jobData._id;
-    });
-
+    const hasApplied = (userApplication || []).some(
+      (item) => item.jobId._id === jobData._id
+    );
     setIsAlreadyApplied(hasApplied);
   };
 
@@ -165,13 +164,15 @@ const ApplyJob = () => {
                     job._id !== jobData._id &&
                     job.companyId._id === jobData.companyId._id
                 )
-                .filter((job) => {// setof applied job ids
-                  const appliedJobsIds = new Set(userApplication.map(app => app.jobId && app.jobId._id))
-                
+                .filter((job) => {
+                  // setof applied job ids
+                  const appliedJobsIds = new Set(
+                    userApplication.map((app) => app.jobId && app.jobId._id)
+                  );
+
                   //REturn true if use not applied for this job
-                  return !appliedJobsIds.has(job._id)
-                }
-                )
+                  return !appliedJobsIds.has(job._id);
+                })
                 .slice(0, 4)
                 .map((job, index) => (
                   <JobCard key={index} job={job} />

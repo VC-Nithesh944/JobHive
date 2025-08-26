@@ -1,6 +1,6 @@
 //Context for the project
 //To manage all the central logic and api call in this file
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useAuth, useUser } from "@clerk/clerk-react";
@@ -56,24 +56,22 @@ export const AppContextProvider = (props) => {
   };
 
   //Function to fetch user Applied applications data
-  const fetchUserApplications = async() =>{
+  const fetchUserApplications = async () => {
     try {
-      
-      const token = await getToken()
-      const {data} = await axios.get(backendUrl + '/api/users/applications' , {
-        headers:{Authorization : `Bearer ${token}`}
-      })
+      const token = await getToken();
+      const { data } = await axios.get(backendUrl + "/api/users/applications", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      if (data.success){
-        setUserApplication(data.applications)
-
-      }else{
-        toast.error(data.message)
+      if (data.success) {
+        setUserApplication(data.applications);
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-  }
+  };
 
   //To execute this function whenever client project gets loaded on website we use UseEffect from react
 
@@ -86,8 +84,12 @@ export const AppContextProvider = (props) => {
     }
   }, []);
 
-  const [companyToken, setCompanyToken] = useState(null);
-  const [companyData, setCompanyData] = useState(null);
+  const [companyToken, setCompanyToken] = useState(
+    localStorage.getItem("companyToken") || ""
+  );
+  const [companyData, setCompanyData] = useState(
+    JSON.parse(localStorage.getItem("companyData")) || null
+  );
   const [userData, setUserData] = useState(null);
   const [userApplication, setUserApplication] = useState([]);
 
@@ -138,9 +140,12 @@ export const AppContextProvider = (props) => {
     companyData,
     setCompanyData,
     backendUrl,
-    userData, setUserData,
-    userApplication, setUserApplication,
-    fetchUserData, fetchUserApplications,
+    userData,
+    setUserData,
+    userApplication,
+    setUserApplication,
+    fetchUserData,
+    fetchUserApplications,
   };
 
   return (

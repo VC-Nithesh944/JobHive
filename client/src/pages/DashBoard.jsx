@@ -28,7 +28,7 @@ const DashBoard = () => {
         <div className="px-5 flex justify-between items-center">
           <img
             onClick={(e) => navigate("/")}
-            className="max-sm:w-32 cursor-pointer"
+            className="navbar-logo cursor-pointer"
             src={assets.logo}
             alt=""
           />
